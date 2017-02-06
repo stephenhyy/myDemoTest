@@ -1,2 +1,2 @@
 # myDemoTest
-some demo by hyy
+some demos by hyy
