@@ -1,6 +1,4 @@
 # myDemoTest
 some demos by hyy
-may use jquery
-hhh
-hhhhhh
-hhhh
+##### 1 waterfall
+瀑布流的事例，比较流行，滑动滚动条触发事件动态的加载图片
