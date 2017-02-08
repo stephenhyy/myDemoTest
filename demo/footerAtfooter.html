@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+	<title>在大屏上footer直接在底部</title>
+	<script src="../js/jquery-2.1.0.min.js"></script>
+	<style>
+		* {
+			margin: 0;
+		}
+		html, body {
+			height: 100%;
+		}
+		.site-header
+		{
+			background-color: darkmagenta;
+		}
+		.page-wrap {
+			min-height: 100%;
+			/* equal to footer height */
+			margin-bottom: -142px;
+			/* equal to header height */
+			margin-top: -100px;
+		}
+		.page-wrap:before,.page-wrap:after {
+			content: "";
+			display: block;
+		}
+		.site-header,.page-wrap:before
+		{
+			height: 100px;
+		}
+		.site-footer, .page-wrap:after {
+			height: 142px;
+		}
+		.site-footer {
+			background: orange;
+		}
+	</style>
+</head>
+<body>
+<header class="site-header">
+	I'm the Sticky Header.
+</header>
+<div class="page-wrap">
+
+	<h1>Sticky Footer</h1>
+	<h2>with Fixed Footer Height</h2>
+	<button id="add">Add Content</button>
+</div>
+
+<footer class="site-footer">
+	I'm the Sticky Footer.
+</footer>
+<script>
+	$("#add").on("click", function() {
+		$("<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>").appendTo(".page-wrap");
+	});
+</script>
+</body>
+</html>
