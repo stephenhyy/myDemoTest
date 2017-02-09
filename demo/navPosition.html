@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+	<title>滑动时导航固定</title>
+	<script src="../js/jquery-2.1.0.min.js"></script>
+	<style>
+		* {
+			margin: 0;
+		}
+		html, body {
+		}
+		.container
+		{
+			width:80%;
+			margin: 0 auto;
+		}
+		.site-header
+		{
+			background-color: darkmagenta;
+		}
+		.page-wrap {
+			width:80%;
+			margin: 0 auto;
+			position: relative;
+			overflow: auto;
+		}
+		.nav
+		 {
+			 width: 40%;
+			 padding: 2%;
+			 box-sizing: border-box;
+			 position: absolute;
+			 left:0;
+			 top: 0;
+
+		 }
+		.content
+		{
+			width: 60%;
+			padding: 2%;
+			box-sizing: border-box;
+			margin-left: 40%;
+		}
+		.site-header
+		{
+			height: 100px;
+		}
+		.site-footer{
+			height: 120px;
+		}
+		.site-footer {
+			background: orange;
+		}
+	</style>
+</head>
+<body>
+<header class="site-header">
+	<div class="container">I'm the Sticky Header.</div>
+</header>
+<div class="page-wrap">
+		<div class="nav">**EMBARGO: No electronic distribution, Web posting or street sales before 3:01 a.m. ET Thursday, Feb. 9, 2017. No exceptions for any reasons. EMBARGO set by source.** Women pray at the grave of Majid Shahriari, a nuclear scientist who was assassinated in 2010, at a public square in Tehran, Iran, Feb. 8, 2017. Gloom and dread can be felt across Tehran, where some blame not only the Trump administration but also their own leaders for the possibility of a violent conflict between Iran and the United States. (Arash Khamooshi/The New York Times)**EMBARGO: No electronic distribution, Web posting or street sales before 3:01 a.m. ET Thursday, Feb. 9, 2017. No exceptions for any reasons. EMBARGO set by source.** Women pray at the grave of Majid Shahriari, a nuclear scientist who was assassinated in 2010, at a public square in Tehran, Iran, Feb. 8, 2017. Gloom and dread can be felt across Tehran, where some blame not only the Trump administration but also their own leaders for the possibility of a violent conflict between Iran and the United States. (Arash Khamooshi/The New York Times)**EMBARGO: No electronic distribution, Web posting or street sales before 3:01 a.m. ET Thursday, Feb. 9, 2017. No exceptions for any reasons. EMBARGO set by source.** Women pray at the grave of Majid Shahriari, a nuclear scientist who was assassinated in 2010, at a public square in Tehran, Iran, Feb. 8, 2017. Gloom and dread can be felt across Tehran, where some blame not only the Trump administration but also their own leaders for the possibility of a violent conflict between Iran and the United States. (Arash Khamooshi/The New York Times) </div>
+		<div class="content"><p>For Spanish, Portuguese and Chinese-language media organizations aiming to extend their in-language coverage, The New York Times News Service provides a selection of translated content. In-depth reporting, news analysis and commentary pieces are paired with images and video, making them suited for use across print, online and mobile environments.
+
+			NYT: CHINESE NEWS SERVICE
+			Authoritative coverage from The New York Times in Chinese. Articles span verticals that include: international news, China-related news, opinion, lifestyle, culture and fashion. 10-14 articles daily.
+			NYT: SERVICIO ANALÍTICO
+			Analítico presents a ‘behind the headlines’ look at international news, opinion, politics, business, science, lifestyle and sports.
+			4-5 articles daily, paired with photos and graphics. Available in Spanish.
+
+			NYT: SPECIAL REPORTS
+			Special Reports offers a curated selection of in-depth analysis and feature content with a focus on news, business or lifestyle.
+			7-10 articles weekly, paired with photos and graphics. Available in Spanish, Portuguese and English.
+
+			THE NEW YORK TIMES VIDEOS
+			Whether it’s reporting on conf licts abroad and political divisions at home, or covering the latest style trends and scientific developments, New York Times video journalists provide a revealing look into the worlds of arts and entertainment, business, health, style and opinion.
+			Up to 20 videos per month in Spanish. Up to 40 videos per month in Portuguese. Full feed available in English.</p><p>For Spanish, Portuguese and Chinese-language media organizations aiming to extend their in-language coverage, The New York Times News Service provides a selection of translated content. In-depth reporting, news analysis and commentary pieces are paired with images and video, making them suited for use across print, online and mobile environments.
+
+			NYT: CHINESE NEWS SERVICE
+			Authoritative coverage from The New York Times in Chinese. Articles span verticals that include: international news, China-related news, opinion, lifestyle, culture and fashion. 10-14 articles daily.
+			NYT: SERVICIO ANALÍTICO
+			Analítico presents a ‘behind the headlines’ look at international news, opinion, politics, business, science, lifestyle and sports.
+			4-5 articles daily, paired with photos and graphics. Available in Spanish.
+
+			NYT: SPECIAL REPORTS
+			Special Reports offers a curated selection of in-depth analysis and feature content with a focus on news, business or lifestyle.
+			7-10 articles weekly, paired with photos and graphics. Available in Spanish, Portuguese and English.
+
+			THE NEW YORK TIMES VIDEOS
+			Whether it’s reporting on conf licts abroad and political divisions at home, or covering the latest style trends and scientific developments, New York Times video journalists provide a revealing look into the worlds of arts and entertainment, business, health, style and opinion.
+			Up to 20 videos per month in Spanish. Up to 40 videos per month in Portuguese. Full feed available in English.</p><p>For Spanish, Portuguese and Chinese-language media organizations aiming to extend their in-language coverage, The New York Times News Service provides a selection of translated content. In-depth reporting, news analysis and commentary pieces are paired with images and video, making them suited for use across print, online and mobile environments.
+
+			NYT: CHINESE NEWS SERVICE
+			Authoritative coverage from The New York Times in Chinese. Articles span verticals that include: international news, China-related news, opinion, lifestyle, culture and fashion. 10-14 articles daily.
+			NYT: SERVICIO ANALÍTICO
+			Analítico presents a ‘behind the headlines’ look at international news, opinion, politics, business, science, lifestyle and sports.
+			4-5 articles daily, paired with photos and graphics. Available in Spanish.
+
+			NYT: SPECIAL REPORTS
+			Special Reports offers a curated selection of in-depth analysis and feature content with a focus on news, business or lifestyle.
+			7-10 articles weekly, paired with photos and graphics. Available in Spanish, Portuguese and English.
+
+			THE NEW YORK TIMES VIDEOS
+			Whether it’s reporting on conf licts abroad and political divisions at home, or covering the latest style trends and scientific developments, New York Times video journalists provide a revealing look into the worlds of arts and entertainment, business, health, style and opinion.
+			Up to 20 videos per month in Spanish. Up to 40 videos per month in Portuguese. Full feed available in English.</p></div>
+</div>
+
+<footer class="site-footer">
+	<div class="container">I'm the Sticky Footer.</div>
+</footer>
+<script>
+	$(document).ready(function(){
+		$(document).scroll(function(){
+			var scrollTop=$(document).scrollTop();
+			var contentHight=$(".content").outerHeight()-$(".nav").outerHeight()
+			console.log(scrollTop);
+			if(scrollTop>100 && scrollTop<contentHight+100)
+			{
+				$(".nav").css({
+					position:"absolute",
+					left:0,
+					top:(scrollTop-100)
+				})
+			}
+			else if(scrollTop<=100)
+			{
+				$(".nav").css({
+					position:"absolute",
+					left:0,
+					top:0
+				})
+			}
+		})
+	})
+</script>
+</body>
+</html>
