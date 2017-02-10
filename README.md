@@ -6,3 +6,5 @@ some demos by hyy
 <p>无论屏幕多大，footer都在底部  <a href="/demo/footerAtfooter.html">demo</a></p>
 <h3>3 navPosition</h3>
 <p>侧边栏始终在屏幕的最上面  <a href="/demo/navPosition.html">demo</a></p>
+<h3>4 360introPage</h3>
+<p>360网站的宣传页  <a href="/demo/360introPage.html">demo</a></p>

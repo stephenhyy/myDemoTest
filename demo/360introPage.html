@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>360的宣传页面</title>
+	<script src="../js/jquery-2.1.0.min.js"></script>
+</head>
+<style>
+	body,ul,li
+	{
+		margin: 0;
+		padding: 0;
+	}
+	body
+	{
+		background: url("../images/bg.jpg") center;
+	}
+	.intro
+	{
+		width: 730px;
+		height: 390px;
+		margin: 100px auto 0;
+		border-radius: 10px;
+		box-shadow: 0 0 10px #fff;
+		background-image: url("../images/text.png");
+	}
+	ul
+	{
+		list-style: none;
+		width: 55px;
+		height: 280px;
+		position: fixed;
+		top: 200px;
+		right: 40px;
+	}
+	.btn ul li
+	{
+		width: 55px;
+		height: 55px;
+		border-radius: 100%;
+		margin-bottom: 10px;
+		background-image: url("../images/icon.jpg");
+	}
+	.btn ul li:hover
+	{
+		cursor: pointer;
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		var index=0;
+		var timer=null;
+		$(".btn ul li").click(function(){
+			index = $(this).index();
+			move();
+			clearInterval(timer);
+			timer=setInterval(function(){
+				index++;
+				index%=4;
+				move()
+			},3000);
+		});
+		$(".intro").mouseover(function(){
+			clearInterval(timer);
+		}).mouseout(function(){
+			timer=setInterval(function(){
+				index++;
+				index%=4;
+				move()
+			},3000);
+		});
+		timer=setInterval(function(){
+			index++;
+			index%=4;
+			move()
+		},3000);
+		function move()
+		{
+			$(".btn ul li").eq(index).animate({backgroundPositionX: "-80px"},500).siblings().css("background-position-x",0);
+			$(".intro").animate({backgroundPositionY: -index*390 + "px"},500)
+		}
+	})
+
+</script>
+<body>
+<div class="intro"></div>
+<div class="btn">
+	<ul>
+		<li style="background-position-x: -80px;"></li>
+		<li style="background-position-y: 56px;"></li>
+		<li style="background-position-y: 126px;"></li>
+		<li style="background-position-y: 195px;"></li>
+	</ul>
+</div>
+
+
+</body>
+</html>
