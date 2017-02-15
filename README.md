@@ -8,3 +8,5 @@ some demos by hyy
 <p>侧边栏始终在屏幕的最上面  <a href="/demo/navPosition.html">demo</a></p>
 <h3>4 360introPage</h3>
 <p>360网站的宣传页  <a href="/demo/360introPage.html">demo</a></p>
+<h3>5 TVimagesPlay</h3>
+<p>TV视频网站的图片轮播事例 <a href="/demo/TVimagesPlay.html">demo</a></p>

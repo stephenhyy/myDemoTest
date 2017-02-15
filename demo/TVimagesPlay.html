@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="../js/jquery-2.1.0.min.js"></script>
+	<style>
+		body,ul,li{
+			padding: 0;
+			margin: 0;
+		}
+		.banner
+		{
+			width: 970px;
+			height: 270px;
+			margin: 100px auto;
+			position: relative;
+		}
+		.banner .pic
+		{
+			width: 100%;
+			height:100%;
+			position: relative;
+			overflow: hidden;
+
+		}
+		.pic ul li
+		{
+			width: 0;
+			height: 0;
+			list-style: none;
+			position: absolute;
+			top: 135px;
+			left: 435px;
+			z-index: 0;
+			background-color: #000;
+			transition:all 0.8s;
+		}
+		.pic ul li img
+		{
+			width: 100%;
+			height: 100%;
+			opacity: 0.5;
+		}
+		.pic ul li.current
+		{
+			width: 530px;
+			height: 270px;
+			top: 0;
+			left: 220px;
+			z-index: 10;
+		}
+		.pic ul li.current img
+		{
+			opacity: 1;
+		}
+		.pic ul li.lSide,.pic ul li.rSide
+		{
+			width: 530px;
+			height: 244px;
+			z-index: 9;
+		}
+		.pic ul li.lSide
+		{
+			top: 13px;
+			left: 0;
+		}
+		.pic ul li.rSide
+		{
+			top: 13px;
+			left: 440px;
+		}
+		.pic ul li.lPrev,.pic ul li.rNext
+		{
+			width: 530px;
+			height: 100px;
+			top: 0;
+			left: -200px;
+		}
+		.pic ul li.lPrev
+		{
+			top: 85px;
+			left: -200px;
+		}
+		.pic ul li.rNext
+		{
+			top: 85px;
+			left: 640px;
+		}
+		.banner .btn div
+		{
+			width: 45px;
+			height: 45px;
+			position: absolute;
+			z-index: 9999;
+			cursor: pointer;
+		}
+		.banner .btn img
+		{
+			width: 100%;
+			height: 100%;
+		}
+		.banner .btn .prev
+		{
+			top: 122px;
+			left: 10px;
+		}
+		.banner .btn .next
+		{
+			top: 122px;
+			right: 10px;
+		}
+	</style>
+</head>
+<body>
+<div class="banner">
+	<div class="pic">
+		<ul>
+			<li class="current"><img src="../images/tv/1.jpg"> </li>
+			<li class="rSide"><img src="../images/tv/2.jpg"></li>
+			<li class="rNext"><img src="../images/tv/3.jpg"></li>
+			<li><img src="../images/tv/4.jpg"></li>
+			<li><img src="../images/tv/5.jpg"></li>
+			<li><img src="../images/tv/6.jpg"></li>
+			<li><img src="../images/tv/7.jpg"></li>
+			<li><img src="../images/tv/8.jpg"></li>
+			<li><img src="../images/tv/9.jpg"></li>
+			<li><img src="../images/tv/10.jpg"></li>
+			<li class="lPrev"><img src="../images/tv/11.jpg"></li>
+			<li class="lSide"><img src="../images/tv/12.jpg"></li>
+		</ul>
+	</div>
+	<div class="btn">
+		<div class="prev"><img src="../images/tv/left.png"></div>
+		<div class="next"><img src="../images/tv/right.png"></div>
+	</div>
+</div>
+<script>
+	$(function(){
+		var time=new Date();
+		$(".btn div").click(function(){
+			var index=$(this).index();
+			if(new Date()-time>800)
+			{
+				move(index);
+				time=new Date();
+			}
+
+		});
+			function move(flag)
+			{
+				var jNodeLis=$(".pic ul li");
+				var indexC=$(".pic ul li.current").index();
+				jNodeLis.removeClass("current").removeClass("rSide").removeClass("rNext").removeClass("lPrev").removeClass("lSide");
+				jNodeLis.each(function(i)
+				{
+					if (i == indexC)
+					{
+						if (!flag)
+						{
+							jNodeLis.eq(i).addClass("rSide");
+							jNodeLis.eq((i + 13) % 12).addClass("rNext");
+							jNodeLis.eq((i + 11) % 12).addClass("current");
+							jNodeLis.eq((i + 10) % 12).addClass("lSide");
+							jNodeLis.eq((i + 9) % 12).addClass("lPrev")
+						}
+						else
+						{
+							jNodeLis.eq(i).addClass("lSide");
+							jNodeLis.eq((i + 13) % 12).addClass("current");
+							jNodeLis.eq((i + 14) % 12).addClass("rSide");
+							jNodeLis.eq((i + 15) % 12).addClass("rNext");
+							jNodeLis.eq((i + 11) % 12).addClass("lPrev")
+						}
+					}
+				});
+
+			}
+
+	})
+</script>
+
+</body>
+</html>
