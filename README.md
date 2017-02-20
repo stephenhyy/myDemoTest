@@ -10,3 +10,5 @@ some demos by hyy
 <p>360网站的宣传页  <a href="/demo/360introPage.html">demo</a></p>
 <h3>5 TVimagesPlay</h3>
 <p>TV视频网站的图片轮播事例 <a href="/demo/TVimagesPlay.html">demo</a></p>
+<h3>平时的一些知识点积累</h3>
+<p> <a href="/demo/smallPoint.html">demo</a></p>
