@@ -5,8 +5,8 @@
 		<p>我是parent中第二个p</p>
 		...很多p标签
 	</div>
-<p>上面一段代码，如果想让第一个p标签高亮，不少人很可能用first-child属性 如 p:first-child{color:red}
-
+<p>上面一段代码，如果想让第一个p标签高亮，不少人很可能用first-child属性 如 
+p:first-child{color:red}
 </p>
 <hr>
 <p>本以为上面的代码可以实现，结果却是没影响</p>
