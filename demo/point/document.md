@@ -1,4 +1,4 @@
-###1 first-child 与 first-of-type###
+## 1 first-child 与 first-of-type ##
 	<div class="parent">
 		<h4>我是parent中的h4</h4>
 		<p>我是parent中第一个p</p>
@@ -8,16 +8,15 @@
 <p>上面一段代码，如果想让第一个p标签高亮，不少人很可能用first-child属性 如 
 p:first-child{color:red}
 </p>
-<hr>
 <p>本以为上面的代码可以实现，结果却是没影响</p>
-<div class="d1">
+<div class="d1" style="margin-left:100px">
 	<h4>我是d1中的h4</h4>
 	<p>我是d1中第一个p</p>
 	<p>我是d1中第二个p</p>
 	...很多p标签
 </div>
 <hr>
-<p style="color: aqua">
+<p style="color: purple;font-size:20px">
 p:first-child的含义
 <br>
 1 找到p标签的父级元素
@@ -29,7 +28,7 @@ p:first-child的含义
 <hr>
 解决方法有多中，可以加class等等，但是如果是动态的数据推荐使用first-of-type
 <br>
-<p style="color: blue">
+<p style="color: blue;font-size:20px">
 	p:first-of-type的含义
 	<br>
 	1 找到p标签的父级元素
@@ -42,6 +41,7 @@ p:first-child的含义
 结果
 <br>
 <style>
+	.d2{margin-left:100px}
 	.d2 p:first-of-type{color:red}
 </style>
 <div class="d2">
@@ -54,10 +54,8 @@ p:first-child的含义
 <p style="font-size: 18px; font-weight:bold">
 	类似的还有last-child（last-of-type）,nth-last-child（nth-last-of-type）,nth-child（nth-of-type）等
 </p>
-#
-#
-#
-###2 margin-top###
+<hr>
+## 2 margin-top ##
 看下面的代码
 
 	.container
@@ -143,9 +141,9 @@ p:first-child的含义
 </div>
 <hr>
 <p>出现这种现象的原因是</p>
-<p style="color: #00f;">一个盒子如果没有上补白(padding-top)和上边框(border-top)，那么这个盒子的上边距会和其内部文档流中的第一个子元素的上边距重叠。<br>也就是说第一个元素的margin-top属性具有传递性（父级元素也具有相同的属性）</p>
-<p>解决方法也有很多种</p>
+<p style="color: #00f;font-size:20px">一个盒子如果没有上补白(padding-top)和上边框(border-top)，那么这个盒子的上边距会和其内部文档流中的第一个子元素的上边距重叠。<br>也就是说第一个元素的margin-top属性具有传递性（父级元素也具有相同的属性）</p>
 <hr>
+<p>解决方法也有很多种</p>
 <h4>a.父级元素加overflow:hidden</h4>
 <style>
 	.container1
