@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c9ca1e4-1cf6-4543-b30a-e2c0f1d7296a" name="Default" comment="模拟的通讯录的滚动效果">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demo/SliderNav.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/slidernav.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/slidernav.js" />
+    <list default="true" id="9c9ca1e4-1cf6-4543-b30a-e2c0f1d7296a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/SliderNav.html" afterPath="$PROJECT_DIR$/demo/SliderNav.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="myDemoTest.iws" />
@@ -69,12 +67,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state>
-              <first_editor vertical-scroll-proportion="0.9630682">
-                <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+              <first_editor vertical-scroll-proportion="0.60227275">
+                <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -85,17 +83,17 @@
       <file leaf-file-name="SliderNav.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/SliderNav.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.689655">
-              <caret line="268" column="41" selection-start-line="268" selection-start-column="41" selection-end-line="268" selection-end-column="41" />
+            <state vertical-scroll-proportion="-3.5517242">
+              <caret line="303" column="28" selection-start-line="303" selection-start-column="28" selection-end-line="303" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="slidernav.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="slidernav.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/slidernav.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33238637">
+            <state vertical-scroll-proportion="0.0">
               <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -160,10 +158,10 @@
         <option value="$PROJECT_DIR$/demo/TVimagesPlay.html" />
         <option value="$PROJECT_DIR$/demo/smallPoint.html" />
         <option value="$PROJECT_DIR$/demo/point/smallPoint.html" />
-        <option value="$PROJECT_DIR$/demo/SliderNav.html" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/css/slidernav.css" />
         <option value="$PROJECT_DIR$/js/slidernav.js" />
+        <option value="$PROJECT_DIR$/demo/SliderNav.html" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -359,6 +357,13 @@
       <option name="number" value="Default" />
       <updated>1486520208938</updated>
     </task>
+    <task id="LOCAL-00001" summary="模拟的通讯录的滚动效果">
+      <created>1487921732558</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1487921732558</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -770,14 +775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo/SliderNav.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.689655">
-          <caret line="268" column="41" selection-start-line="268" selection-start-column="41" selection-end-line="268" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/slidernav.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.966666">
@@ -786,24 +783,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state>
-          <first_editor vertical-scroll-proportion="0.9630682">
-            <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/slidernav.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33238637">
+        <state vertical-scroll-proportion="0.0">
           <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/SliderNav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.5517242">
+          <caret line="303" column="28" selection-start-line="303" selection-start-column="28" selection-end-line="303" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.60227275">
+            <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

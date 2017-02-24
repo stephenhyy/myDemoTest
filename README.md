@@ -12,6 +12,7 @@ some demos by hyy
 <p>TV视频网站的图片轮播事例 <a href="/demo/TVimagesPlay.html">demo</a></p>
 <h3>6 canvasClock</h3>
 <p>利用canvas写的时钟事例 <a href="/demo/canvasClock.html">demo</a></p>
+<h3>7 SliderNav</h3>
 <p>仿照手机的通讯录写的一个导航的小插件 <a href="/demo/SliderNav.html">demo</a></p>
 <h3>平时的一些知识点积累</h3>
 <p> <a href="/demo/point/smallPoint.html">demo</a></p>
