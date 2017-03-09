@@ -37,15 +37,13 @@
 	});
 	$(window).resize(_.debounce(function(){
 		jtxt1.append('<p style="color: red">有函数防抖动:'+$(window).width()+"time:"+new Date().format("hh:mm:ss")+'</p>')
-	},5000))
+	},1000))
 	$(window).scroll(function(){
 		jtxt2.append('<p>原生的没有函数节流:'+$(document).scrollTop()+"time:"+new Date().format("hh:mm:ss")+'</p>')
 	});
 	$(window).scroll(_.throttle(function(){
 		jtxt2.append('<p style="color: blue">有函数防节流:'+$(document).scrollTop()+"time:"+new Date().format("hh:mm:ss")+'</p>')
-	},1000,{trailing: false}))
-	setInterval()
-	clearInterval()
+	},1000)
 </script>
 
 </body>
