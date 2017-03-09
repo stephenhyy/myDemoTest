@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+</head>
+<body>
+<div id="text1" style="width: 50%;float: left"><p>窗口的宽度：</p>
+</div>
+<div id="text2" style="width: 50%;float: left"><p>滚动条距离顶点的位置：</p>
+</div>
+<script>
+	var jtxt1=$("#text1");
+	var jtxt2=$("#text2");
+	Date.prototype.format = function(fmt)
+	{ //author: meizz
+		var o = {
+			"M+" : this.getMonth()+1,                 //月份
+			"d+" : this.getDate(),                    //日
+			"h+" : this.getHours(),                   //小时
+			"m+" : this.getMinutes(),                 //分
+			"s+" : this.getSeconds(),                 //秒
+			"q+" : Math.floor((this.getMonth()+3)/3), //季度
+			"S"  : this.getMilliseconds()             //毫秒
+		};
+		if(/(y+)/.test(fmt))
+			fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+		for(var k in o)
+			if(new RegExp("("+ k +")").test(fmt))
+				fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+		return fmt;
+	}
+	$(window).resize(function(){
+		jtxt1.append('<p>原生的没有函数防抖动:'+$(window).width()+"time:"+new Date().format("hh:mm:ss")+'</p>')
+	});
+	$(window).resize(_.debounce(function(){
+		jtxt1.append('<p style="color: red">有函数防抖动:'+$(window).width()+"time:"+new Date().format("hh:mm:ss")+'</p>')
+	},5000))
+	$(window).scroll(function(){
+		jtxt2.append('<p>原生的没有函数节流:'+$(document).scrollTop()+"time:"+new Date().format("hh:mm:ss")+'</p>')
+	});
+	$(window).scroll(_.throttle(function(){
+		jtxt2.append('<p style="color: blue">有函数防节流:'+$(document).scrollTop()+"time:"+new Date().format("hh:mm:ss")+'</p>')
+	},1000,{trailing: false}))
+	setInterval()
+	clearInterval()
+</script>
+
+</body>
+</html>
