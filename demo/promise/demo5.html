@@ -20,7 +20,7 @@
 <script>
 	function request(){
 		var p = new Promise(function(resolve, reject){
-			$.getJSON('http://freemusicarchive.org/api/get/curators.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=?', function(data,statue){
+			$.getJSON('https://freemusicarchive.org/api/get/curators.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=?', function(data,statue){
 				resolve(data);
 			});
 		});
@@ -29,7 +29,7 @@
 
 	function request1(){
 		var p = new Promise(function(resolve, reject){
-			$.getJSON('http://freemusicarchive.org/api/get/curators11.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=?', function(data,statue){
+			$.getJSON('https://freemusicarchive.org/api/get/curators11.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=?', function(data,statue){
 				resolve(data);
 			});
 		});
