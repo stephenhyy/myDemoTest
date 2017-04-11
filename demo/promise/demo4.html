@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+</head>
+<body>
+<span>Promise的all方法提供了并行执行异步操作的能力，all会把所有异步操作的结果放进一个数组中传给then。有一个场景是很适合用这个的，一些游戏类的素材比较多的应用，打开网页时，预先加载需要用到的各种资源如图片、flash以及各种静态文件。所有的都加载完后，我们再进行页面的初始化。</span>
+<script>
+	function runAsync1()
+	{
+		var p = new Promise(function (resolve, reject)
+		{
+			//做一些异步操作
+			setTimeout(function ()
+			{
+				console.log('1执行完成');
+				resolve('data1');
+			}, 500);
+		});
+		return p;
+	}
+	function runAsync2()
+	{
+		var p = new Promise(function (resolve, reject)
+		{
+			//做一些异步操作
+			setTimeout(function ()
+			{
+				console.log('2执行完成');
+				resolve('data2');
+			}, 2500);
+		});
+		return p;
+	}
+	function runAsync3()
+	{
+		var p = new Promise(function (resolve, reject)
+		{
+			//做一些异步操作
+			setTimeout(function ()
+			{
+				console.log('3执行完成');
+				resolve('data3');
+			}, 4500);
+		});
+		return p;
+	}
+	Promise
+			.all([runAsync1(), runAsync2(), runAsync3()])
+			.then(function(results){
+				console.log(results);
+			});
+
+</script>
+</body>
+</html>

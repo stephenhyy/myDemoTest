@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+</head>
+<body>
+<!--http://freemusicarchive.org/api/get/curators.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=test-->
+<p>正确请求的data:</p>
+<div>
+	<button id="btn1">btn1</button>
+	<p id="title1">title</p>
+</div>
+<p>错误请求的data</p>
+<div>
+	<button id="btn2">btn2</button>
+	<p id="title2">title</p>
+</div>
+<script>
+	function request(){
+		var p = new Promise(function(resolve, reject){
+			$.getJSON('http://freemusicarchive.org/api/get/curators.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=?', function(data,statue){
+				resolve(data);
+			});
+		});
+		return p;
+	}
+
+	function request1(){
+		var p = new Promise(function(resolve, reject){
+			$.getJSON('http://freemusicarchive.org/api/get/curators11.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=?', function(data,statue){
+				resolve(data);
+			});
+		});
+		return p;
+	}
+	//延时函数，用于给请求计时
+	function timeout(){
+		var p = new Promise(function(resolve, reject){
+			setTimeout(function(){
+				reject('the request is not right.');
+			}, 5000);
+		});
+		return p;
+	}
+	function timeout1(){
+		var p = new Promise(function(resolve, reject){
+			setTimeout(function(){
+				reject('the request is not right.');
+			}, 5000);
+		});
+		return p;
+	}
+	$("#btn1").click(function()
+	{
+		Promise
+				.race([request(), timeout()])
+				.then(function (results)
+				{
+					$('#title1').html(results.title);
+				})
+				.catch(function (reason)
+				{
+					$('#title1').html(reason);
+				});
+	})
+	$("#btn2").click(function()
+	{
+		Promise
+				.race([request1(), timeout1()])
+				.then(function (results)
+				{
+					$('#title2').html(results.title);
+				})
+				.catch(function (reason)
+				{
+					$('#title2').html(reason);
+				});
+	})
+
+</script>
+</body>
+</html>

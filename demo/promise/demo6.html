@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+</head>
+<body>
+<span></span>
+<script>
+	function runAsync1()
+	{
+		var p = new Promise(function (resolve, reject)
+		{
+			//做一些异步操作
+			setTimeout(function ()
+			{
+				console.log('1执行完成');
+				resolve('data1');
+			}, 1000);
+		});
+		return p;
+	}
+	function runAsync2()
+	{
+		var p = new Promise(function (resolve, reject)
+		{
+			//做一些异步操作
+			setTimeout(function ()
+			{
+				console.log('2执行完成');
+				resolve('data2');
+			}, 1000);
+		});
+		return p;
+	}
+	function runAsync3()
+	{
+		var p = new Promise(function (resolve, reject)
+		{
+			//做一些异步操作
+			setTimeout(function ()
+			{
+				console.log('3执行完成');
+				resolve('data3');
+			}, 1000);
+		});
+		return p;
+	}
+	runAsync1()
+			.then(function(data){
+				console.log(data);
+				return runAsync2();
+			})
+			.then(function(data){
+				console.log(data);
+				return runAsync3();
+			})
+			.then(function(data){
+				console.log(data);
+			});
+</script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+</head>
+<body>
+<!--promise状态变为resolve或reject，就凝固了，不会再改变-->
+<p>请求的data</p>
+<div>
+	<button id="btn1">btn1</button>
+	<p id="title1">title</p>
+</div>
+<script>
+//	asyncTask1(data, function (data1){
+//
+//		asyncTask2(data1, function (data2){
+//
+//			asyncTask3(data2, function (data3){
+//				// .... 魔鬼式的金字塔还在继续
+//			});
+//
+//		});
+//
+//	});
+
+	function request(){
+		var p = new Promise(function(resolve, reject){
+
+				$.getJSON('http://freemusicarchive.org/api/get/curators.jsonp?api_key=60BLHNQCAOUFPIBZ&callback=?', function (data, statue,f)
+				{
+					setTimeout(function()
+					{
+						if (statue === "success")
+							resolve(data);
+						else
+							reject('there is some errors.');
+					},5000)
+				});
+				setTimeout(function(){
+					reject('the request is not right.');
+				}, 1000);
+
+		});
+
+		return p;
+	}
+	$("#btn1").click(function()
+	{
+		request()
+				.then(function (results)
+				{
+					$('#title1').html(results.title);
+				},function (reason)
+				{
+					$('#title1').html(reason);
+				})
+				.catch(function (reason)
+				{
+					$('#title1').html(reason);
+				});
+	})
+
+</script>
+</body>
+</html>
