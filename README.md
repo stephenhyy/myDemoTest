@@ -16,3 +16,5 @@ some demos by hyy
 <p>仿照手机的通讯录写的一个导航的小插件 <a href="/demo/SliderNav.html">demo</a></p>
 <h3>平时的一些知识点积累</h3>
 <p> <a href="/demo/point/smallPoint.html">demo</a></p>
+
+<p> <a href="/demo/static/index.html">demo</a></p>
