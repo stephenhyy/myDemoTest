@@ -1,0 +1,165 @@
+.content-wrapper{
+    margin-left: 0;
+}
+.hideDetail{
+    display: none;
+}
+.showDetail{
+    display: block;
+}
+/* 表格每行工具栏显示 */
+div.tools{
+    float: right;
+    visibility: hidden;
+}
+div.tools span{
+    margin-right: 16px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #00c0ef;
+}
+div.tools span:last-of-type{
+    margin-right: 2px;
+}
+table tr:hover td div.tools{
+    visibility: visible;
+}
+/*编辑弹出框样式*/
+#editChild .modal-header{
+    border: 0;
+}
+.modal-body.view{
+    padding-top: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+ul{
+    list-style-type: none;
+}
+ul li .form-group{
+    margin-bottom: 0;
+}
+.major,.child{
+    max-height: 200px;
+    overflow: auto
+}
+.major .form-group{
+    overflow: hidden;
+}
+.child{
+    max-height: 120px;
+}
+#childList .showRightDetail,
+.addChildList .showRightDetail{
+    border-left: 3px solid #f4f4f4;
+    display: block;
+}
+#childList .hideRightDetail,
+.addChildList .hideRightDetail{
+    display: none;
+}
+#childList span.subjectTitle,
+.addChildList span.subjectTitle{
+    display: inline-block;
+    max-width: 50px;
+    overflow: hidden;
+}
+#childList span.subjectTitle.click,
+.addChildList span.subjectTitle.click{
+    color: #337ab7
+}
+.modal-body.addMajor{
+    max-height: 400px;
+    overflow: auto;
+}
+.form-group .errorTip{
+    display: none;
+}
+.form-group .errorTip.show{
+    display: inline-block;
+}
+/*弹框样式*/
+/*.modal.in .modal-dialog{*/
+    /*position: relative;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%,-50%);*/
+    /*margin:0;*/
+/*}*/
+.modal-header {
+    padding: 8px 15px;
+    color: #f4f4f4;
+    background-color: #3c8dbc;
+    border-bottom-color: #367fa9;
+}
+.modal-footer{
+    padding: 8px 15px
+}
+.modal-footer .form-group{
+    margin-bottom: 0;
+}
+input[type=radio]{
+    height: 16px;
+    margin-top: 0;
+}
+.has-feedback .form-control{
+    padding: 6px;
+}
+.searchStatus
+{
+    display: inline-block;
+    line-height: 31px;
+    padding: 0;
+    float: left;
+}
+.cdn{
+    margin-top: 3px;
+    width: 50px;
+    height: 25px;
+    background: #ccc;
+    border-radius: 25px;
+    position: relative;
+    float: left;
+    cursor: pointer;
+}
+.change-text{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 26px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+}
+.change-btn{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: #eee;
+    border-radius: 100%;
+    position: absolute;
+    left: 26px;
+}
+.cdn.on{
+    background: #3c8dbc;
+}
+.on .change-text{
+    left: 0;
+}
+.on .change-btn{
+    background: #286090;
+    left: 26px;
+}
+.off .change-text{
+    left: 26px;
+}
+.off .change-btn{
+    background: #eee;
+    left: 0;
+}
+.switchToCdn,.switchToNocdn{
+    line-height: 25px;
+    padding: 10px;
+    display: none;
+}

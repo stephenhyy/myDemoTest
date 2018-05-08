@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<div th:replace="header :: head"></div>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/js/adminlte.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.0.0-19/css/ionicons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/AdminLTE.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/skins/skin-blue.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/flat/blue.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
+
+    <link rel="stylesheet" href="css/page.css">
+    <!-- 页面js -->
+    <script src="js/commonInit.js"></script>
+    <script src="js/card.js"></script>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header container-fluid">
+            <!--<div class="box-header ui-sortable-handle">-->
+            <!--<i class="fa fa-user"></i>-->
+            <!--<h3 class="box-title">卡片列表</h3>-->
+            <!--</div>-->
+            <div class="box-header ui-sortable-handle box box-primary detail-header">
+                <div class="pull-left">
+                    <span class="searchStatus">筛选上架状态：</span>
+                    <div style="float: left;margin-right: 10px;">
+                        <select class="form-control" id="searchStatus" onchange="searchStatus()">
+                            <option value="0">下架</option>
+                            <option value="1" selected>上架</option>
+                            <option value="2">全部</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group col-sm-3 pull-left">
+                    <input type="text" name="search" class="form-control" placeholder="名称或主题搜索">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary btn-flat" onclick="searchElement()"><i class="fa fa-search"></i> 查 询</button>
+                    </div>
+                </div>
+                <div class="">
+                    <span class="searchStatus" style="margin-left: 10px">是否使用CDN：</span>
+                    <div id="changeCdn" class="cdn" data-toggle="modal" data-target="#changeCdnMajor" onclick="changeCount()">
+                        <span class="change-text"></span>
+                        <span class="change-btn"></span>
+                    </div>
+                </div>
+
+
+                <div class="btn-group pull-right" >
+                    <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#addMajor">
+                        <i class="fa fa-user-plus"></i> 添 加
+                    </button>
+                    <button type="button" class="btn btn-primary btn-flat" onclick="searchElement(true)">
+                        <i class="fa fa-rotate-right"></i> 刷 新
+                    </button>
+                    <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#publishMajor">
+                        <i class="fa fa-hand-paper-o"></i> 发 布
+                    </button>
+                    <a class="btn btn-primary btn-flat" href="javascript:void(0)">
+                        <i class="fa fa-eye"></i> 查看所有元件
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div class="box box-info">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="tableContent" class="table table-bordered table-striped table-hover dataTable" role="grid">
+                                    <thead>
+                                    <tr role="row">
+                                        <th tabindex="0" rowspan="1" colspan="1" aria-sort="ascending">卡片编号</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">卡片名称</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">卡片类型</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">权重</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">发布区域</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">功能名称</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">是否显示header</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">跳转类型</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">上架状态</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <!-- 新增用户弹出框 -->
+    <div class="modal fade" id="addMajor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="min-width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMajorModal">添加卡片</h4>
+                </div>
+                <div class="modal-body addMajor">
+                    <form class="form-horizontal" id="addMajorForm">
+                        <!--隐藏域-->
+                        <input type="hidden" class="form-control" name="picGroupName" id="imgGroupName" placeholder="group名称">
+                        <input type="hidden" class="form-control" name="picFileName" id="imgFileName" placeholder="file名称">
+                        <input type="hidden" class="form-control" name="iconGroupName" id="iconGroupName" placeholder="group名称">
+                        <input type="hidden" class="form-control" name="iconFileName" id="iconFileName" placeholder="file名称">
+                        <div class="form-group">
+                            <label for="addMajorSubject" class="col-sm-3 control-label">主标题：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="name" id="addMajorSubject" placeholder="请输入相应主题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addMajorDescription" class="col-sm-3 control-label">副标题：</label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" rows="3" name="abstractCnt" id="addMajorDescription" placeholder="请输入相应摘要"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addmajorSort" class="col-sm-3 control-label">权重（越大越高）：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="weight" id="addMajorSort" value="100" placeholder="请输入相应的权重">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">广告大图：</label>
+                            <div class="col-sm-6">
+                                <input type="file" id="addImage" name="addImage" accept="image/png" onchange="uploadImg('addMajorForm')">
+                                <p class="help-block">仅支持png文件</p>
+                                <img id="preImg" name="preImg"  width="100" height="100" src="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">广告小图：</label>
+                            <div class="col-sm-6">
+                                <input type="file" id="addIcon" name="addIcon" accept="image/png" onchange="uploadIcon('addMajorForm')">
+                                <p class="help-block">仅支持png文件</p>
+                                <img id="preIcon"  name="preIcon" width="100" height="100" src="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否显示header：</label>
+                            <div class="radio col-sm-6" id="addMajorHeaderCtrl">
+                                <label>
+                                    <input type="radio" name="headerCtl"  value="0" checked>
+                                    显示
+                                </label>
+                                <label>
+                                    <input type="radio" name="headerCtl"  value="1">
+                                    不显示
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">卡片类型：</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="groupType" id="addMajorgroupType">
+                                    <option value="0">1*1图片</option>
+                                    <option value="1">1*1图文</option>
+                                    <option value="2">1*2图片</option>
+                                    <option value="3" selected>1*4图片</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">发布区域：</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="isTop">
+                                    <option value="0">置顶组</option>
+                                    <option value="1" selected>普通组</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否上架：</label>
+                            <div class="radio col-sm-6">
+                                <label>
+                                    <input type="radio" name="status"  value="0">
+                                    下架
+                                </label>
+                                <label>
+                                    <input type="radio" name="status"  value="1" checked>
+                                    上架
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label class="col-sm-3 control-label">是否用CDN：</label>
+                            <div class="radio col-sm-6">
+                                <label>
+                                    <input type="radio" name="isCdn"  value="0" checked>使用
+                                </label>
+                                <label>
+                                    <input type="radio" name="isCdn"  value="1">不使用
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">跳转类型：</label>
+                            <div class="radio col-sm-6" id="addswitchType">
+                                <label>
+                                    <input type="radio" name="switchType"  value="0" >
+                                    跳转地址
+                                </label>
+                                <label>
+                                    <input type="radio" name="switchType"  value="1" checked>
+                                    跳转原生
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addMajorIOS" class="col-sm-3 control-label">最低iOS版本：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="iosVersion" id="addMajorIOS" placeholder="请输入兼容iOS最低版本">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addMajorAndroid" class="col-sm-3 control-label">最低Android版本：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="androidVersion" id="addMajorAndroid" placeholder="请输入兼容Android最低版本">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">iOS跳转地址：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="urlIos" id="addMajorIOSUrl" placeholder="请输入iOS跳转地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Android跳转地址：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="urlAndroid" id="addMajorAndroidUrl" placeholder="请输入Andriod跳转地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">可选关联元件：</label>
+                            <div class="col-sm-6 addChildList" id="addChildList">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group" style="overflow: hidden">
+                        <label class="errorTip" style="float: left;color: red;"></label>
+                    </div>
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal" id="addCancelBtn">取消</button>
+                    <button type="button" class="btn btn-primary btn-flat" id="addOkBtn">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 新增广告组弹窗结束 -->
+
+    <!--查看-->
+    <div class="modal fade" id="viewMajor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="min-width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">查看当前卡片</h4>
+                    <input type="hidden" name="majorId">
+                </div>
+                <div class="modal-body view">
+                    <form class="form-horizontal" id="viewMajorForm">
+                    </form>
+                    <script type="text/x-handlebars-template" id="view-major-tpl">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">卡片ID：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="id" class="form-control" disabled="" title="{{id}}" value="{{id}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editMajorSubject" class="col-sm-3 control-label">主标题：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="name" title="{{name}}" disabled value="{{name}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editMajorDescription" class="col-sm-3 control-label">副标题：</label>
+                                <div class="col-sm-6">
+                                    <textarea class="form-control" rows="3" name="abstractCnt" title="{{abstractCnt}}" disabled>{{abstractCnt}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editMajorSort" class="col-sm-3 control-label">权重（越大越高）：</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" name="weight" disabled value="{{weight}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">广告大图：</label>
+                                <div class="col-sm-6">
+                                    <img  name="preImg" width="100" height="100" src="{{picPath}}" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">广告小图：</label>
+                                <div class="col-sm-6">
+                                    <img  name="preIcon" width="100" height="100" src="{{iconPath}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">是否显示header：</label>
+                                <div class="radio col-sm-6">
+                                    {{#each headerRadio}}
+                                    <label>
+                                        <input type="radio" name="headerCtl" disabled value="{{num}}" {{selected}}>
+                                        {{name}}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">广告组类型：</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" disabled>
+                                        {{#each typeSelect}}
+                                        <option value="{{num}}" {{selected}}>{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">发布区域：</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" disabled>
+                                        {{#each zoneSelect}}
+                                        <option value="{{num}}" {{selected}}>{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">是否上架：</label>
+                                <div class="radio col-sm-6">
+                                    {{#each statusRadio}}
+                                    <label>
+                                        <input type="radio" name="status"  value="{{num}}" disabled {{checked}}>
+                                        {{name}}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">是否用CDN：</label>
+                                <div class="radio col-sm-6">
+                                    {{#each cdnRadio}}
+                                    <label>
+                                        <input type="radio" name="isCdn"  value="{{num}}" disabled {{checked}}>
+                                        {{name}}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">跳转类型：</label>
+                                <div class="radio col-sm-6">
+                                    {{#each switchRadio}}
+                                    <label>
+                                        <input type="radio" name="switchType"  disabled value="{{num}}" {{checked}}>
+                                        {{name}}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editMajorIOS" class="col-sm-3 control-label">最低iOS版本：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="iosVersion" title="{{iosVersion}}" disabled value="{{iosVersion}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editMajorAndroid" class="col-sm-3 control-label">最低Android版本：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="androidVersion" title="{{androidVersion}}" disabled value="{{androidVersion}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">iOS跳转地址：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="urlIos" title="{{urlIos}}" disabled value="{{urlIos}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Android跳转地址：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="urlAndroid" title="{{urlAndroid}}" disabled value="{{urlAndroid}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editMajorAndroid" class="col-sm-3 control-label">关联元件：</label>
+                                <div class="col-sm-6">
+                                    <ul class="list-group">
+                                        {{#each children}}
+                                        <li class="list-group-item">
+                                            <span>{{name}}</span>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </script>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 编辑广告组弹出框 -->
+    <div class="modal fade" id="editMajor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="min-width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="editUserModal">编辑卡片</h4>
+                    <input type="hidden" name="majorId">
+                </div>
+                <div class="modal-body" style="max-height: 400px;overflow: auto;">
+                    <form class="form-horizontal" id="editMajorForm">
+                        <div class="row">
+                            <div class="col-sm-6" id="editCard">
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label>已关联和可关联的元素</label>
+                                </div>
+                                <div class="row editChildList" id="editChildList">
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/x-handlebars-template" id="major-tpl">
+                        <input type="hidden" class="form-control" name="picGroupName" value="{{picGroupName}}" id="editImgGroupName" placeholder="group名称">
+                        <input type="hidden" class="form-control" name="picFileName" value="{{picFileName}}" id="editImgFileName" placeholder="file名称">
+                        <input type="hidden" class="form-control" name="iconGroupName" value="{{iconGroupName}}" id="editIconGroupName" placeholder="group名称">
+                        <input type="hidden" class="form-control" name="iconFileName" value="{{iconFileName}}" id="editIconFileName" placeholder="file名称">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">卡片ID：</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="id" class="form-control"  id="majorId" disabled="" title="{{id}}" value="{{id}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editMajorSubject" class="col-sm-5 control-label">主标题：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="name" id="editMajorSubject" value="{{name}}" placeholder="请输入相应主题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editMajorDescription" class="col-sm-5 control-label">副标题：</label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" rows="3" name="abstractCnt" id="editMajorDescription" placeholder="请输入相应摘要">{{abstractCnt}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editMajorSort" class="col-sm-5 control-label">权重（越大越高）：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="weight" value="{{weight}}" id="editMajorSort" placeholder="请输入相应的权重">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-5 control-label">广告大图：</label>
+                            <div class="col-sm-6">
+                                <input type="file" id="editImage" name="addImage" accept="image/png" onchange="uploadImg('editMajorForm')">
+                                <p class="help-block">仅支持png文件</p>
+                                <img id="editPreImg" name="preImg" width="100" height="100" src="{{picPath}}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-5 control-label">广告小图：</label>
+                            <div class="col-sm-6">
+                                <input type="file" id="editIcon" name="addIcon" accept="image/png" onchange="uploadIcon('editMajorForm')">
+                                <p class="help-block">仅支持png文件</p>
+                                <img id="editPreIcon" name="preIcon" width="100" height="100" src="{{iconPath}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">是否显示header：</label>
+                            <div class="radio col-sm-6" id="editMajorHeaderCtrl">
+                                {{#each headerRadio}}
+                                <label>
+                                    <input type="radio" name="headerCtl"  value="{{num}}" {{checked}}>
+                                    {{name}}
+                                </label>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">广告组类型：</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="editMajorType" name="groupType">
+                                    {{#each typeSelect}}
+                                    <option value="{{num}}" {{selected}}>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">发布区域：</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="editMajorZone" name="isTop">
+                                    {{#each zoneSelect}}
+                                    <option value="{{num}}"  {{selected}}>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">是否上架：</label>
+                            <div class="radio col-sm-6">
+                                {{#each statusRadio}}
+                                <label>
+                                    <input type="radio" name="status"  value="{{num}}" {{checked}}>
+                                    {{name}}
+                                </label>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label class="col-sm-5 control-label">是否用CDN：</label>
+                            <div class="radio col-sm-6">
+                                {{#each cdnRadio}}
+                                <label>
+                                    <input type="radio" name="isCdn"  value="{{num}}" {{checked}}>
+                                    {{name}}
+                                </label>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">跳转类型：</label>
+                            <div class="radio col-sm-6" id="editswitchType">
+                                {{#each switchRadio}}
+                                <label>
+                                    <input type="radio" name="switchType"  value="{{num}}" {{checked}}>
+                                    {{name}}
+                                </label>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editMajorIOS" class="col-sm-5 control-label">最低iOS版本：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="iosVersion" id="editMajorIOS" value="{{iosVersion}}" placeholder="请输入兼容iOS最低版本">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editMajorAndroid" class="col-sm-5 control-label">最低Android版本：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="androidVersion" id="editMajorAndroid" value="{{androidVersion}}" placeholder="请输入兼容Android最低版本">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-5 control-label">iOS跳转地址：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="urlIos" value="{{urlIos}}" id="editMajorIOSUrl" placeholder="请输入iOS跳转地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Android跳转地址：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="urlAndroid" value="{{urlAndroid}}" id="editMajorAndroidUrl" placeholder="请输入Andriod跳转地址">
+                            </div>
+                        </div>
+                    </script>
+                    <script type="text/x-handlebars-template" id="child-tpl">
+                        <ul class="nav nav-list">
+                            {{#each children}}
+                            <li>
+                                <div class="checkbox icheck">
+                                    <label class="">
+                                        <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" name="optionChild" current-id="{{id}}" {{checked}} style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                    </label>
+                                    <a href="#element{{id}}" data-toggle="collapse">{{name}}</a>
+                                </div>
+                                <div id="element{{id}}" class="collapse">
+                                    <ul class="nav nav-list">
+                                        <li>
+                                            <form class="form-horizontal">
+                                                <div class="row" style="margin:0 0 10px 0">
+                                                    <div class="col-sm-9">
+                                                        <label class="col-sm-4 control-label" style="text-align:right">ID：</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  disabled=""  title="{{id}}" value="{{id}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin:0 0 10px 0">
+                                                    <div class="col-sm-9">
+                                                        <label class="col-sm-4 control-label" style="text-align:right">主题：</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  disabled="" title="{{name}}" value="{{name}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin:0 0 10px 0">
+                                                    <div class="col-sm-9">
+                                                        <label class="col-sm-4 control-label" style="text-align:right">摘要：</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  disabled="" title="{{abstractCnt}}" value="{{abstractCnt}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin:0 0 10px 0">
+                                                    <div class="col-sm-9">
+                                                        <label class="col-sm-4 control-label" style="text-align:right">图片：</label>
+                                                        <div class="col-sm-8">
+                                                            <img src="{{picPath}}" width="60" height="40"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </script>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group" style="overflow: hidden">
+                        <label class="errorTip" style="float: left;color: red;"></label>
+                    </div>
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-flat" id="editOkBtn">更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 编辑广告组弹窗结束 -->
+
+    <!-- 删除广告组弹出框 -->
+    <div class="modal fade" id="deleteMajor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">删除广告组</h4>
+                </div>
+                <div class="modal-body">
+                    确定删除该广告组？
+                    <input type="hidden" name="majorId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-flat" id="deleteOkBtn">确 认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 删除用户弹窗结束 -->
+    <!-- 发布弹出框 -->
+    <div class="modal fade" id="publishMajor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myPublishModalLabel">发布</h4>
+                </div>
+                <div class="modal-body">
+                    确定发布卡片组？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="publishOkBtn">确 认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--&lt;!&ndash; 发布弹窗结束 &ndash;&gt;-->
+    <!-- change CDN 弹出框 -->
+    <div class="modal fade" id="changeCdnMajor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="">确定变换卡片组和元件组的CDN？</h4>
+                </div>
+                <div class="modal-body">
+                    确定切换cdn方式？切换后要想立即生效需要重新发布!
+                    <input type="hidden" name="changeToStatus">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="changeCdnOkBtn">确 认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--&lt;!&ndash; change CDN 弹出框 结束 &ndash;&gt;-->
+    <!-- ./wrapper -->
+
+
+</div>
+</body>
+</html>
